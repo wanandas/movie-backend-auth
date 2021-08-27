@@ -1,4 +1,4 @@
-### create default.json and add this cole for setup
+### create default.json and add this code for setup
 
 ```javascript
 {
