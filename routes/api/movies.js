@@ -52,6 +52,24 @@ Router.post("/movies", auth, async (req, res) => {
   });
 });
 
+Router.patch("/movie/:id", auth, async (req, res) => {
+  const movie = await Movie.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
+
+  if (!movie) {
+    return next(new AppError("No movie found with that ID", 404));
+  }
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      movie,
+    },
+  });
+});
+
 Router.delete("/movie/:id", auth, async (req, res) => {
   if (req.body.role === 1) {
     const movie = await Movie.findByIdAndDelete(req.params.id);
