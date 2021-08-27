@@ -11,24 +11,20 @@ Router.get("/movie/:id", auth, async (req, res) => {
 
     res.status(200).json({
       status: "success",
-      data: {
-        movie,
-      },
+      movie,
     });
   } catch (err) {
     console.error(err);
   }
 });
 
-Router.get("/movies", auth, async (req, res) => {
+Router.get("/movies", async (req, res) => {
   try {
     const allMovie = await Movie.find({}, { __v: 0 });
 
     res.status(200).json({
       status: "success",
-      data: {
-        movie: allMovie,
-      },
+      movies: allMovie,
     });
   } catch (err) {
     console.error(err);
@@ -46,9 +42,7 @@ Router.post("/movies", auth, async (req, res) => {
 
   res.status(201).json({
     status: "success",
-    data: {
-      movie: newMovie,
-    },
+    movie: newMovie,
   });
 });
 
@@ -64,9 +58,7 @@ Router.patch("/movie/:id", auth, async (req, res) => {
 
   res.status(200).json({
     status: "success",
-    data: {
-      movie,
-    },
+    movie,
   });
 });
 
@@ -80,7 +72,7 @@ Router.delete("/movie/:id", auth, async (req, res) => {
 
     res.status(204).json({
       status: "success",
-      data: null,
+      movie: null,
     });
   } else {
     res.status(401).json({
