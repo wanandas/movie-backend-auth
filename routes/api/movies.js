@@ -18,7 +18,7 @@ Router.get("/movie/:id", auth, async (req, res) => {
   }
 });
 
-Router.get("/movies", async (req, res) => {
+Router.get("/movies", auth, async (req, res) => {
   try {
     const allMovie = await Movie.find({}, { __v: 0 });
 

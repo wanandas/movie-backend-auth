@@ -98,6 +98,7 @@ Router.post("/login", (req, res) => {
               success: true,
               token: token,
               role: user.role,
+              _id: user.id,
             });
           }
         );
