@@ -63,22 +63,16 @@ Router.patch("/movie/:id", auth, async (req, res) => {
 });
 
 Router.delete("/movie/:id", auth, async (req, res) => {
-  if (req.body.role === 1) {
-    const movie = await Movie.findByIdAndDelete(req.params.id);
+  const movie = await Movie.findByIdAndDelete(req.params.id);
 
-    if (!movie) {
-      return next(new AppError("No movie found with that ID", 404));
-    }
-
-    res.status(204).json({
-      status: "success",
-      movie: null,
-    });
-  } else {
-    res.status(401).json({
-      status: "Need MANAGER for delete this movie",
-    });
+  if (!movie) {
+    return next(new AppError("No movie found with that ID", 404));
   }
+
+  res.status(204).json({
+    status: "success",
+    movie: null,
+  });
 });
 
 module.exports = Router;
